@@ -4,11 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <title>{%block title%} {%endblock%}</title>
-
-    {% block css %} {%endblock%}
+    <link rel="stylesheet" href="{% static 'movie_app/css/index.css' %}">
 
 </head>
 <body>
+    <a class="main" href="{% url 'index' %}">Главная</a>
 {%block content%}
 {%endblock%}
 </body>

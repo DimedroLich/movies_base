@@ -1,0 +1,15 @@
+{%extends 'movie_app/base.html'%}
+
+
+{%block title%}
+    Информация о фильме {{movie.name}}
+{%endblock%}
+
+{%block content%}
+<div>
+<h2>Информация о фильме</h2>
+    <h3>{{movie.name}}</h3>
+    <p><b>Рейтинг фильма: </b> {{movie.rating}} | <b>Год фильма:</b> {{movie.year | default:'Неизвестен'}} | <b>Бюджет фильма:</b>
+            {{movie.budget}}</p>
+</div>
+{%endblock%}

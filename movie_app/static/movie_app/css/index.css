@@ -1,15 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 
+
+
 body {
     background-color: #333;
     color:whitesmoke;
     font-family: 'Roboto', sans-serif;
-    margin: 2rem;
+    /* margin: 2rem; */
     }
+
+div {
+    margin: 2rem;
+}
 
 li {
     list-style-type: square;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
 }
 
 h3 {
@@ -23,4 +29,17 @@ p {
     margin-top: 0.3rem;
     word-spacing: 5px;
     letter-spacing: 10%;
+}
+
+a {
+    text-decoration: none;
+    color: whitesmoke;
+}
+
+a:hover {
+    color: gold;
+}
+.main {
+    margin: 0px;
+    padding: 0px;
 }
