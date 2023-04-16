@@ -1,12 +1,14 @@
 from django.shortcuts import render,get_object_or_404
+from django.db.models import Count
 from .models import Movie
 # Create your views here.
 
 def index(request):
-    content = {
-        "movies" : Movie.objects.all().order_by('name')
+    context = {
+        "movies" : Movie.objects.order_by('name'),
+        'movies_in_base': Movie.objects.count()
     }
-    return render(request,'movie_app/index.html',context=content)
+    return render(request,'movie_app/index.html',context=context)
 
 def about_movie(request, slug_movie:str):
     context = {
