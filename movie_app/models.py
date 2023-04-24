@@ -9,6 +9,8 @@ class Movie(models.Model):
     year = models.PositiveIntegerField(null=True)
     budget = models.PositiveIntegerField(default=40_000_000)
     slug = models.SlugField(default='',null=False)
+    # director = models.ForeignKey(to='Director',on_delete=models.PROTECT)
+
 
     def save(self,*args,**kwargs):
         self.slug = slugify(self.name)
@@ -19,3 +21,12 @@ class Movie(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Director(models.Model):
+    first_name = models.CharField(max_length=128)
+    second_name = models.CharField(max_length=128)
+    email = models.EmailField()
+
+    def __str__(self):
+        return f"{self.first_name} {self.second_name}"
