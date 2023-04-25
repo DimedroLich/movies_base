@@ -1,0 +1,26 @@
+{% extends 'movie_app/base.html' %}}
+
+{%block content%}
+<div>
+ <h2>Информация о режиссёре: {{director}}</h2>
+
+ Имя: <b>{{director.first_name}}</b>, Фамилия: <b>{{director.second_name}}</b>
+  <p>Электронная почта: <b>{{director.email}}</b></p>
+
+ {% if movies %}
+  <p><h3>Фильмы режжисёра:</h3></p>
+
+  {% for movie in movies%}
+   <ul>
+    <li>
+     <h4>{{movie}}</h4>
+    </li>
+   </ul>
+  {% endfor%}
+ {% else %}
+  <h4>К сожалению в нашей базе нет фильмов данного режиссёра 🙁🙁</h4>
+ {% endif %}
+
+</div>
+
+{%endblock content%}

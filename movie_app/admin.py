@@ -7,8 +7,8 @@ from .models import Movie, Director
 # Register your models here.
 
 class MovieAdmin(admin.ModelAdmin):
-    list_display = ["name", "rating", "year", "budget",]
-    list_editable = ["rating", "year", "budget",]
+    list_display = ["name", "rating", "year", "director",]
+    list_editable = ["rating", "director",]
     ordering = ['name']
     search_fields = ('name',)
     list_filter = ('budget', 'rating')

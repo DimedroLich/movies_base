@@ -9,7 +9,7 @@ class Movie(models.Model):
     year = models.PositiveIntegerField(null=True)
     budget = models.PositiveIntegerField(default=40_000_000)
     slug = models.SlugField(default='',null=False)
-    # director = models.ForeignKey(to='Director',on_delete=models.PROTECT)
+    director = models.ForeignKey(to='Director',on_delete=models.PROTECT, null=True,blank=True)
 
 
     def save(self,*args,**kwargs):
@@ -30,3 +30,6 @@ class Director(models.Model):
 
     def __str__(self):
         return f"{self.first_name} {self.second_name}"
+
+    def get_absolute_url(self):
+        return reverse('about_director',args=[self.id])
