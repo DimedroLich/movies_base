@@ -1,7 +1,9 @@
 {% extends 'movie_app/base.html' %}}
 
 {%block content%}
+
 <div>
+  {% if directors %}
   <h1>Список всех режиссёров:</h1>
   {% for director in directors %}
     <ul>
@@ -10,7 +12,18 @@
       </li>
     </ul>
   {% endfor %}
+  {% else %}
+  <h1>Список всех актёров:</h1>
+    {% for actor in actors %}
+    <ul>
+      <li>
+        <h3><a href="{{actor.get_absolute_url}}">{{ actor.second_name }} {{ actor.first_name }} </a></h3>
+      </li>
+    </ul>
+  {% endfor %}
+  {% endif %}
 </div>
+
 
 
 {%endblock%}

@@ -1,4 +1,4 @@
-{% extends 'movie_app/base.html' %}}
+{% extends 'movie_app/base.html' %}
 
 {%block content%}
 <div>
@@ -13,7 +13,7 @@
   {% for movie in movies%}
    <ul>
     <li>
-     <h4><a href="{{movie.get_urlz}}">{{movie}}</a></h4>
+     <h4><a href="{{movie.get_url}}">{{movie}}</a></h4>
     </li>
    </ul>
   {% endfor%}

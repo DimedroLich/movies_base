@@ -10,7 +10,7 @@ class Movie(models.Model):
     budget = models.PositiveIntegerField(default=40_000_000)
     slug = models.SlugField(default='',null=False)
     director = models.ForeignKey(to='Director',on_delete=models.PROTECT, null=True,blank=True)
-
+    actors = models.ManyToManyField(to='Actor')
 
     def save(self,*args,**kwargs):
         self.slug = slugify(self.name)
@@ -33,3 +33,24 @@ class Director(models.Model):
 
     def get_absolute_url(self):
         return reverse('about_director',args=[self.id])
+
+
+class Actor(models.Model):
+    MALE = 'M'
+    FEMALE = 'F'
+    GENDERS = (
+        (MALE,'Мужчина'),
+        (FEMALE,'Женщина'),
+    )
+    first_name = models.CharField(max_length=128)
+    second_name = models.CharField(max_length=128)
+    gender = models.CharField(max_length=1,choices=GENDERS,default=MALE)
+
+    def __str__(self):
+        if self.gender == self.MALE:
+            return f"Актёр {self.first_name} {self.second_name}"
+        return f'Актриса {self.first_name} {self.second_name}'
+
+
+    def get_absolute_url(self):
+        return reverse('about_actor',args=[self.id])

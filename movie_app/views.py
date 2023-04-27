@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Count
-from .models import Movie, Director
+from .models import Movie, Director, Actor
 
 
 # Create your views here.
@@ -14,8 +14,10 @@ def index(request):
 
 
 def about_movie(request, slug_movie: str):
+    movie = get_object_or_404(Movie, slug=slug_movie)
     context = {
-        "movie": get_object_or_404(Movie, slug=slug_movie),
+        "movie": movie,
+        'actors' : movie.actors.all()
     }
     return render(request, 'movie_app/about_movie.html', context=context)
 
@@ -24,16 +26,34 @@ def directors(request):
     context = {
         'directors': Director.objects.order_by('second_name')
     }
-    return render(request, 'movie_app/directors.html', context=context)
+    return render(request, 'movie_app/directors_actors.html', context=context)
 
 
 def about_director(request, director_id):
     director = get_object_or_404(Director,id=director_id)
     movies = director.movie_set.all()
-    # topic = Topic.objects.get(id=topic_id)
-    # entries = topic.entry_set.order_by('-date_added')
     context = {
         'director': director,
         'movies' : movies,
     }
     return render(request, 'movie_app/about_director.html', context=context)
+
+
+def actors(request):
+    context = {
+        'actors' : Actor.objects.all()
+    }
+    return render(request,'movie_app/directors_actors.html', context=context)
+
+
+def about_actor(request,actor_id):
+    actor = Actor.objects.get(id=actor_id)
+    if actor.gender == 'F':
+        actor.gender = 'Женский'
+    else:
+        actor.gender = 'Мужской'
+    context = {
+        "actor": actor,
+        "movies" : actor.movie_set.all()
+    }
+    return render(request, 'movie_app/about_actor.html', context=context)
