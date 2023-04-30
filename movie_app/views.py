@@ -49,11 +49,12 @@ def actors(request):
 def about_actor(request,actor_id):
     actor = Actor.objects.get(id=actor_id)
     if actor.gender == 'F':
-        actor.gender = 'Женский'
+        gender_visualization = 'Женский'
     else:
-        actor.gender = 'Мужской'
+        gender_visualization = 'Мужской'
     context = {
         "actor": actor,
-        "movies" : actor.movie_set.all()
+        "movies" : actor.movie_set.all(),
+        'gender' : gender_visualization,
     }
     return render(request, 'movie_app/about_actor.html', context=context)

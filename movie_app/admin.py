@@ -1,14 +1,14 @@
 from django.contrib import admin
 from django.db.models import QuerySet
-from .models import Movie, Director,Actor
+from .models import Movie, Director,Actor,DressingRoom
 
 
 # Register your models here.
 
 class MovieAdmin(admin.ModelAdmin):
-    list_display = ["name", "rating", "year", "director",]
+    list_display = ["name",'id', "rating", "year", "director",]
     list_editable = ["rating", "director",]
-    ordering = ['name']
+    ordering = ['id']
     search_fields = ('name',)
     list_filter = ('budget', 'rating')
     filter_horizontal = ('actors',)
@@ -21,10 +21,11 @@ class DirectorAdmin(admin.ModelAdmin):
     ordering = ('second_name',)
 
 class ActorAdmin(admin.ModelAdmin):
-    list_display = ('second_name', 'first_name', 'gender')
+    list_display = ('second_name', 'id','first_name', 'gender')
     list_editable = ('gender',)
     ordering = ('second_name',)
 
 admin.site.register(Movie, MovieAdmin)
 admin.site.register(Director, DirectorAdmin)
 admin.site.register(Actor,ActorAdmin)
+admin.site.register(DressingRoom)

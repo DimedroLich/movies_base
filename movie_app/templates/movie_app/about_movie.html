@@ -13,11 +13,14 @@
     <p><b>Рейтинг фильма: </b> {{movie.rating}} | <b>Год фильма:</b> {{movie.year | default:'Неизвестен'}} | <b>Бюджет фильма:</b>
             {{movie.budget}}</p>
   {% if movie.director %}
+    <hr>
   <p><b>Режиссёр фильма:</b> <a href="{{movie.director.get_absolute_url}}">{{movie.director}}</a></p>
     {% else %}
   {% endif %}
-    {% if actors %}
+
 </div>
+  {% if actors %}
+  <hr>
   <div id="about-actors-block">
   <p><b>В фильме снимаются:</b>
   {% for act in actors %}
