@@ -1,9 +1,9 @@
 {% extends 'movie_app/base.html' %}
-
+{%block title%} {{title}} {%endblock%}
 {%block content%}
 <div>
  <h2>Информация о режиссёре: {{director}}</h2>
-
+{{bobo}}
  Имя: <b>{{director.first_name}}</b>, Фамилия: <b>{{director.second_name}}</b>
   <p>Электронная почта: <b>{{director.email}}</b></p>
 
