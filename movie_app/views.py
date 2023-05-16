@@ -1,5 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Count
+from django.views.generic import ListView
+
 from .models import Movie, Director, Actor
 
 
@@ -22,11 +24,17 @@ def about_movie(request, slug_movie: str):
     return render(request, 'movie_app/about_movie.html', context=context)
 
 
-def directors(request):
-    context = {
-        'directors': Director.objects.order_by('second_name')
-    }
-    return render(request, 'movie_app/directors_actors.html', context=context)
+class Directors(ListView):
+    template_name = 'movie_app/directors_actors.html'
+    model = Director
+    context_object_name = 'directors'
+    ordering = ('second_name',)
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Список режиссёров'
+        return context
+
 
 
 def about_director(request, director_id):
@@ -39,11 +47,16 @@ def about_director(request, director_id):
     return render(request, 'movie_app/about_director.html', context=context)
 
 
-def actors(request):
-    context = {
-        'actors' : Actor.objects.all()
-    }
-    return render(request,'movie_app/directors_actors.html', context=context)
+class Actors(ListView):
+    template_name = 'movie_app/directors_actors.html'
+    model = Actor
+    context_object_name = 'actors'
+    ordering = ('second_name',)
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Список актёров'
+        return context
 
 
 def about_actor(request,actor_id):
